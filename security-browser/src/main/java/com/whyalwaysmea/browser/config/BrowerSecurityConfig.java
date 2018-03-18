@@ -1,5 +1,6 @@
-package com.whyalwaysmea.browser;
+package com.whyalwaysmea.browser.config;
 
+import com.whyalwaysmea.browser.authentication.MyAuthenctiationFailureHandler;
 import com.whyalwaysmea.core.properties.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -8,6 +9,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 /**
  * @Author: HanLong
@@ -20,6 +23,12 @@ public class BrowerSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private SecurityProperties securityProperties;
 
+    @Autowired
+    private AuthenticationSuccessHandler myAuthenticationSuccessHandler;
+
+    @Autowired
+    private AuthenticationFailureHandler myAuthenticationFailureHandler;
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -29,7 +38,9 @@ public class BrowerSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin()                    //  定义当需要用户登录时候，转到的登录页面。
                 .loginPage("/authentication/require")           // 设置登录页面
-                .loginProcessingUrl("/authentication/require")  // 自定义的登录接口
+                .loginProcessingUrl("/user/login")              // 自定义的登录接口
+                .successHandler(myAuthenticationSuccessHandler) // 自定义登录成功处理
+                .failureHandler(myAuthenticationFailureHandler) // 自定义登录失败处理
                 .and()
                 .authorizeRequests()        // 定义哪些URL需要被保护、哪些不需要被保护
                 .antMatchers("/authentication/require", securityProperties.getBrowser().getLoginPage()).permitAll()     // 设置所有人都可以访问登录页面
