@@ -39,7 +39,6 @@ public class ValidateCodeFilter extends OncePerRequestFilter {
                 authenticationFailureHandler.onAuthenticationFailure(httpServletRequest, httpServletResponse, e);
                 return ;
             }
-
         }
 
         filterChain.doFilter(httpServletRequest, httpServletResponse);
