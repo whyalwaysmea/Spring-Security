@@ -15,6 +15,8 @@ public class ImageProperties {
 
     private int expireTime = 60;
 
+    private String url;
+
     public int getWidth() {
         return width;
     }
@@ -45,5 +47,13 @@ public class ImageProperties {
 
     public void setExpireTime(int expireTime) {
         this.expireTime = expireTime;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

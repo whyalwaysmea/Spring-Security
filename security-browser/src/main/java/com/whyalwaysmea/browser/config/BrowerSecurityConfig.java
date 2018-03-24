@@ -8,11 +8,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+
+import javax.sql.DataSource;
 
 /**
  * @Author: HanLong
@@ -31,15 +36,35 @@ public class BrowerSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private AuthenticationFailureHandler myAuthenticationFailureHandler;
 
+    @Autowired
+    private DataSource dataSource;
+
+    @Autowired
+    private UserDetailsService myUserDetailsService;
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    /**
+     * 配置TokenRepository
+     * @return
+     */
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository() {
+        JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();
+        jdbcTokenRepository.setDataSource(dataSource);
+//        jdbcTokenRepository.setCreateTableOnStartup(true);
+        return jdbcTokenRepository;
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         ValidateCodeFilter validateCodeFilter = new ValidateCodeFilter();
         validateCodeFilter.setAuthenticationFailureHandler(myAuthenticationFailureHandler);
+        validateCodeFilter.setSecurityProperties(securityProperties);
+        validateCodeFilter.afterPropertiesSet();
 
         http.addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class)
                 .formLogin()                    //  定义当需要用户登录时候，转到的登录页面。
@@ -47,6 +72,11 @@ public class BrowerSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/user/login")              // 自定义的登录接口
                 .successHandler(myAuthenticationSuccessHandler) // 自定义登录成功处理
                 .failureHandler(myAuthenticationFailureHandler) // 自定义登录失败处理
+                .and()
+                .rememberMe()                                   // 记住我相关配置
+                .tokenRepository(persistentTokenRepository())
+                .tokenValiditySeconds(securityProperties.getBrowser().getRememberMeSeconds())
+                .userDetailsService(myUserDetailsService)
                 .and()
                 .authorizeRequests()        // 定义哪些URL需要被保护、哪些不需要被保护
                 .antMatchers("/authentication/require",
