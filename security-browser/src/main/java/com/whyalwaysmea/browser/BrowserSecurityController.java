@@ -1,6 +1,7 @@
 package com.whyalwaysmea.browser;
 
 import com.whyalwaysmea.browser.dto.BaseResponse;
+import com.whyalwaysmea.core.properties.SecurityConstants;
 import com.whyalwaysmea.core.properties.SecurityProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,7 +46,7 @@ public class BrowserSecurityController {
      * @param response
      * @return
      */
-    @RequestMapping("/authentication/require")
+    @RequestMapping(SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_FORM)
     @ResponseStatus(code = HttpStatus.UNAUTHORIZED)
     public BaseResponse requireAuthenication(HttpServletRequest request, HttpServletResponse response) throws IOException {
         SavedRequest savedRequest = requestCache.getRequest(request, response);

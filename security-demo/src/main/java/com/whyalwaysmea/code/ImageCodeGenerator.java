@@ -1,8 +1,7 @@
 package com.whyalwaysmea.code;
 
-import com.whyalwaysmea.core.validate.ImageCode;
+import com.whyalwaysmea.core.validate.image.ImageCode;
 import com.whyalwaysmea.core.validate.ValidateCodeGenerator;
-import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.ServletWebRequest;
 
 /**

@@ -1,6 +1,9 @@
 package com.whyalwaysmea.core.validate;
 
 import com.whyalwaysmea.core.properties.SecurityProperties;
+import com.whyalwaysmea.core.validate.image.ImageValidateCodeGenerator;
+import com.whyalwaysmea.core.validate.sms.DefaultSmsCodeSender;
+import com.whyalwaysmea.core.validate.sms.SmsCodeSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
@@ -22,11 +25,17 @@ public class ValidateCodeBeanConfig {
      * @return
      */
     @Bean
-    @ConditionalOnMissingBean(name = "imageCodeGenerator")
-    public ValidateCodeGenerator imageCodeGenerator() {
+    @ConditionalOnMissingBean(name = "imageValidateCodeGenerator")
+    public ValidateCodeGenerator imageValidateCodeGenerator() {
         ImageValidateCodeGenerator imageValidateCodeGenerator = new ImageValidateCodeGenerator();
         imageValidateCodeGenerator.setSecurityProperties(securityProperties);
         return imageValidateCodeGenerator;
     }
 
+    @Bean
+    @ConditionalOnMissingBean(SmsCodeSender.class)
+    public SmsCodeSender smsCodeGenerator() {
+        SmsCodeSender smsCodeSender = new DefaultSmsCodeSender();
+        return smsCodeSender;
+    }
 }

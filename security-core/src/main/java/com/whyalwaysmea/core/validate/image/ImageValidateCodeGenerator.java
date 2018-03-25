@@ -1,7 +1,7 @@
-package com.whyalwaysmea.core.validate;
+package com.whyalwaysmea.core.validate.image;
 
 import com.whyalwaysmea.core.properties.SecurityProperties;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.whyalwaysmea.core.validate.ValidateCodeGenerator;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.context.request.ServletWebRequest;
 
@@ -15,7 +15,6 @@ import java.util.Random;
  * @Description:
  */
 public class ImageValidateCodeGenerator implements ValidateCodeGenerator {
-
 
     private SecurityProperties securityProperties;
 
@@ -56,7 +55,7 @@ public class ImageValidateCodeGenerator implements ValidateCodeGenerator {
 
         g.dispose();
 
-        return new ImageCode(image, sRand, securityProperties.getCode().getImage().getExpireTime());
+        return new ImageCode(image, sRand, securityProperties.getCode().getImage().getExpireIn());
 
     }
 

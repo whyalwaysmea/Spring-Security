@@ -29,4 +29,6 @@ public class SecurityProperties {
     public void setCode(ValidateCodeProperties code) {
         this.code = code;
     }
+
+
 }
