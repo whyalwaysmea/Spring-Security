@@ -76,12 +76,15 @@ public class BrowerSecurityConfig extends AbstractChannelSecurityConfig {
                     .tokenValiditySeconds(securityProperties.getBrowser().getRememberMeSeconds())
                     .userDetailsService(myUserDetailsService)
                     .and()
+                .sessionManagement()                           // session超时跳转
+                    .invalidSessionUrl("/session/invalid")
+                    .and()
                 .authorizeRequests()        // 定义哪些URL需要被保护、哪些不需要被保护
                     .antMatchers(SecurityConstants.DEFAULT_UNAUTHENTICATION_URL,
                             SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_MOBILE,
                             securityProperties.getBrowser().getLoginPage(),
                             SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX+"/*",
-                            "/user/regist")
+                            "/user/regist", "/session/invalid")
                     .permitAll()                // 设置所有人都可以访问登录页面
                     .anyRequest()               // 任何请求,登录后可以访问
                     .authenticated()
