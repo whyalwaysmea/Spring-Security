@@ -19,6 +19,8 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.security.web.session.InvalidSessionStrategy;
+import org.springframework.security.web.session.SessionInformationExpiredStrategy;
 
 import javax.sql.DataSource;
 
@@ -44,6 +46,12 @@ public class BrowerSecurityConfig extends AbstractChannelSecurityConfig {
 
     @Autowired
     private ValidateCodeSecurityConfig validateCodeSecurityConfig;
+
+    @Autowired
+    private SessionInformationExpiredStrategy sessionInformationExpiredStrategy;
+
+    @Autowired
+    private InvalidSessionStrategy invalidSessionStrategy;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -76,8 +84,12 @@ public class BrowerSecurityConfig extends AbstractChannelSecurityConfig {
                     .tokenValiditySeconds(securityProperties.getBrowser().getRememberMeSeconds())
                     .userDetailsService(myUserDetailsService)
                     .and()
-                .sessionManagement()                           // session超时跳转
-                    .invalidSessionUrl("/session/invalid")
+                .sessionManagement()
+                    .invalidSessionStrategy(invalidSessionStrategy) // session超时跳转
+                    .maximumSessions(securityProperties.getBrowser().getSession().getMaximumSessions()) // 最大并发session
+                    .maxSessionsPreventsLogin(securityProperties.getBrowser().getSession().isMaxSessionsPreventsLogin())    // 是否阻止新的登录
+                    .expiredSessionStrategy(sessionInformationExpiredStrategy)      // 并发session失效原因
+                    .and()
                     .and()
                 .authorizeRequests()        // 定义哪些URL需要被保护、哪些不需要被保护
                     .antMatchers(SecurityConstants.DEFAULT_UNAUTHENTICATION_URL,
