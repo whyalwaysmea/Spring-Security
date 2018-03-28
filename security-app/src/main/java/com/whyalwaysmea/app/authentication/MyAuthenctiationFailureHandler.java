@@ -1,4 +1,4 @@
-package com.whyalwaysmea.browser.authentication;
+package com.whyalwaysmea.app.authentication;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.whyalwaysmea.core.dto.BaseResponse;

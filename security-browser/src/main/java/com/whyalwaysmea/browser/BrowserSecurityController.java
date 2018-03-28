@@ -1,6 +1,6 @@
 package com.whyalwaysmea.browser;
 
-import com.whyalwaysmea.browser.dto.BaseResponse;
+import com.whyalwaysmea.core.dto.BaseResponse;
 import com.whyalwaysmea.core.properties.SecurityConstants;
 import com.whyalwaysmea.core.properties.SecurityProperties;
 import org.slf4j.Logger;

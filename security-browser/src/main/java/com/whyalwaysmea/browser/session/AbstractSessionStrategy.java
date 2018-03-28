@@ -3,7 +3,7 @@ package com.whyalwaysmea.browser.session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.whyalwaysmea.browser.dto.BaseResponse;
+import com.whyalwaysmea.core.dto.BaseResponse;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

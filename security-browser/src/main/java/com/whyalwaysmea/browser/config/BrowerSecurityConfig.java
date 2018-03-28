@@ -53,11 +53,6 @@ public class BrowerSecurityConfig extends AbstractChannelSecurityConfig {
     @Autowired
     private InvalidSessionStrategy invalidSessionStrategy;
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
     /**
      * 配置TokenRepository
      * @return

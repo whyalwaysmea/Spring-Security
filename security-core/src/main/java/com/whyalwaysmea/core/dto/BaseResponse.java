@@ -1,4 +1,4 @@
-package com.whyalwaysmea.browser.dto;
+package com.whyalwaysmea.core.dto;
 
 /**
  * @Author: HanLong
