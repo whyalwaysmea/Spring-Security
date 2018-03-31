@@ -60,7 +60,9 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
      * @param validateCode
      */
     private void save(ServletWebRequest request, C validateCode) {
-        sessionStrategy.setAttribute(request, getSessionKey(request), validateCode);
+        //TODO 直接存imageCode会出错，因为BufferedImage无法序列化的
+//        sessionStrategy.setAttribute(request, getSessionKey(request), validateCode);
+        sessionStrategy.setAttribute(request, getSessionKey(request), validateCode.getCode());
     }
 
     /**

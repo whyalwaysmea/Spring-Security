@@ -1,5 +1,6 @@
 package com.whyalwaysmea.browser.config;
 
+import com.whyalwaysmea.core.authentication.AuthorizeConfigManager;
 import com.whyalwaysmea.core.authentication.sms.AbstractChannelSecurityConfig;
 import com.whyalwaysmea.core.properties.SecurityConstants;
 import com.whyalwaysmea.core.properties.SecurityProperties;
@@ -9,6 +10,8 @@ import com.whyalwaysmea.core.validate.ValidateCodeSecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -53,6 +56,9 @@ public class BrowerSecurityConfig extends AbstractChannelSecurityConfig {
     @Autowired
     private InvalidSessionStrategy invalidSessionStrategy;
 
+    @Autowired
+    private AuthorizeConfigManager authorizeConfigManager;
+
     /**
      * 配置TokenRepository
      * @return
@@ -86,17 +92,10 @@ public class BrowerSecurityConfig extends AbstractChannelSecurityConfig {
                     .expiredSessionStrategy(sessionInformationExpiredStrategy)      // 并发session失效原因
                     .and()
                     .and()
-                .authorizeRequests()        // 定义哪些URL需要被保护、哪些不需要被保护
-                    .antMatchers(SecurityConstants.DEFAULT_UNAUTHENTICATION_URL,
-                            SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_MOBILE,
-                            securityProperties.getBrowser().getLoginPage(),
-                            SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX+"/*",
-                            "/user/regist", "/session/invalid")
-                    .permitAll()                // 设置所有人都可以访问登录页面
-                    .anyRequest()               // 任何请求,登录后可以访问
-                    .authenticated()
-                    .and()
                 .csrf().disable();          // 关闭csrf防护
+
+        authorizeConfigManager.config(http.authorizeRequests());
+        
     }
 
 }

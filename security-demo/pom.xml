@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>com.whyalwaysmea.security</groupId>
-            <artifactId>security-app</artifactId>
+            <artifactId>security-browser</artifactId>
             <version>${my.security.version}</version>
         </dependency>
         <dependency>
