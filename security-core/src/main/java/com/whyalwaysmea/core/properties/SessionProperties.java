@@ -3,7 +3,7 @@ package com.whyalwaysmea.core.properties;
 /**
  * @Author: HanLong
  * @Date: Create in 2018/3/27 21:45
- * @Description:
+ * @Description:    Session相关配置
  */
 public class SessionProperties {
 

@@ -11,7 +11,7 @@ import org.springframework.web.context.request.ServletWebRequest;
 /**
  * @Author: HanLong
  * @Date: Create in 2018/3/24 14:26
- * @Description:
+ * @Description:    短信验证码生成器
  */
 @Component("smsValidateCodeGenerator")
 public class SmsCodeGenerator implements ValidateCodeGenerator {

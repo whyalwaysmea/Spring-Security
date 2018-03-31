@@ -39,6 +39,8 @@ public class MyAuthenctiationFailureHandler extends SimpleUrlAuthenticationFailu
 
         logger.info("登录失败");
 
+        // 判断是用哪一种方式进行登录的
+        // 如果是JSON，则返回JSON字符串；否则进行页面的跳转
         if (LoginResponseType.JSON.equals(securityProperties.getBrowser().getLoginType())) {
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
             response.setContentType("application/json;charset=UTF-8");

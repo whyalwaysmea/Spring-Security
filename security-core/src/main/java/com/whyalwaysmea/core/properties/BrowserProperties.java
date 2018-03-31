@@ -4,16 +4,25 @@ package com.whyalwaysmea.core.properties;
 /**
  * @Author: HanLong
  * @Date: Create in 2018/3/18 15:21
- * @Description:
+ * @Description:    浏览器登录认证相关配置
  */
 public class BrowserProperties {
 
     private SessionProperties session = new SessionProperties();
 
+    /**
+     * 默认登录页面
+     */
     private String loginPage = SecurityConstants.DEFAULT_LOGIN_PAGE_URL;
 
+    /**
+     * 默认登录方式
+     */
     private LoginResponseType loginType = LoginResponseType.JSON;
 
+    /**
+     * 默认记住我的时长
+     */
     private int rememberMeSeconds = 3600;
 
     public SessionProperties getSession() {

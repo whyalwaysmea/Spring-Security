@@ -3,7 +3,7 @@ package com.whyalwaysmea.core.properties;
 /**
  * @Author: HanLong
  * @Date: Create in 2018/3/21 22:08
- * @Description:
+ * @Description:    验证码相关的配置
  */
 public class ValidateCodeProperties {
 

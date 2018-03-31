@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 /**
  * @Author: HanLong
  * @Date: Create in 2018/3/24 15:31
- * @Description:
+ * @Description:    验证码
  */
 @Component
 public class SmsCodeAuthenticationSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
@@ -36,6 +36,7 @@ public class SmsCodeAuthenticationSecurityConfig extends SecurityConfigurerAdapt
         smsCodeAuthenticationFilter.setAuthenticationSuccessHandler(myAuthenticationSuccessHandler);
         smsCodeAuthenticationFilter.setAuthenticationFailureHandler(myAuthenticationFailureHandler);
 
+        // 获取验证码提供者
         SmsCodeAuthenticationProvider smsCodeAuthenticationProvider = new SmsCodeAuthenticationProvider();
         smsCodeAuthenticationProvider.setUserDetailsService(userDetailsService);
 

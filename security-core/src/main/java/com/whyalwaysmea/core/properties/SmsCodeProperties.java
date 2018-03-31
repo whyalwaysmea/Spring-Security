@@ -3,11 +3,18 @@ package com.whyalwaysmea.core.properties;
 /**
  * @Author: HanLong
  * @Date: Create in 2018/3/24 14:16
- * @Description:
+ * @Description:    验证码
  */
 public class SmsCodeProperties {
 
+    /**
+     * 验证码长度
+     */
     private int length = 6;
+
+    /**
+     * 过期时间
+     */
     private int expireIn = 60;
 
     private String url;

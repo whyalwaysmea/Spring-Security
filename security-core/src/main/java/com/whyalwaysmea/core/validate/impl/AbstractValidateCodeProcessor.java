@@ -3,7 +3,7 @@ package com.whyalwaysmea.core.validate.impl;
 /**
  * @Author: HanLong
  * @Date: Create in 2018/3/24 14:10
- * @Description:
+ * @Description:    抽象的验证码处理器
  */
 
 import com.whyalwaysmea.core.validate.*;

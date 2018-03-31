@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @Author: HanLong
  * @Date: Create in 2018/3/24 15:30
- * @Description:
+ * @Description:    短信验证码过滤器
  */
 public class SmsCodeAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 

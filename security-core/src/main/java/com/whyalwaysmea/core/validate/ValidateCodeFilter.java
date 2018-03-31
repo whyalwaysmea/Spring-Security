@@ -29,7 +29,7 @@ import java.util.Set;
 /**
  * @Author: HanLong
  * @Date: Create in 2018/3/21 21:04
- * @Description:
+ * @Description:    验证码过滤器
  */
 @Component("validateCodeFilter")
 public class ValidateCodeFilter extends OncePerRequestFilter implements InitializingBean{

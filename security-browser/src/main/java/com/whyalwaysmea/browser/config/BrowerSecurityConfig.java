@@ -95,7 +95,7 @@ public class BrowerSecurityConfig extends AbstractChannelSecurityConfig {
                 .csrf().disable();          // 关闭csrf防护
 
         authorizeConfigManager.config(http.authorizeRequests());
-        
+
     }
 
 }

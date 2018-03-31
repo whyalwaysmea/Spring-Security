@@ -10,7 +10,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 /**
  * @Author: HanLong
  * @Date: Create in 2018/3/24 15:55
- * @Description:
+ * @Description:    基础的登录配置
  */
 public class AbstractChannelSecurityConfig extends WebSecurityConfigurerAdapter {
 
