@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 /**
  * @Author: HanLong
  * @Date: Create in 2018/3/31 15:03
- * @Description:
+ * @Description:    默认的权限配置
  */
 @Component
 @Order(Integer.MIN_VALUE)

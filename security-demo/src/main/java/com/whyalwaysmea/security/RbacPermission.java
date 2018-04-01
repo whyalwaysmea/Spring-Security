@@ -13,7 +13,7 @@ import java.util.Set;
 /**
  * @Author: HanLong
  * @Date: Create in 2018/3/31 16:04
- * @Description:
+ * @Description:   跟业务相关的权限配置
  */
 @Component("rbacPermission")
 public class RbacPermission {

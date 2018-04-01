@@ -9,12 +9,15 @@ import java.util.Collection;
 /**
  * @Author: HanLong
  * @Date: Create in 2018/3/24 15:29
- * @Description:  手机验证码登录信息
+ * @Description:  手机验证码登录信息  类似于{@link UsernamePasswordAuthenticationToken}
  */
 public class SmsCodeAuthenticationToken extends AbstractAuthenticationToken {
 
     private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
 
+    /**
+     * 手机号
+     */
     private final Object principal;
 
     public SmsCodeAuthenticationToken(String mobile) {

@@ -14,11 +14,18 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @Author: HanLong
  * @Date: Create in 2018/3/24 15:30
- * @Description:    短信验证码过滤器
+ * @Description:    短信验证码过滤器  类似于{@link AuthenticationFilter}
  */
 public class SmsCodeAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
+    /**
+     * 请求中的参数
+     */
     private String mobileParameter = SecurityConstants.DEFAULT_PARAMETER_NAME_MOBILE;
+
+    /**
+     * 只接受POST方式
+     */
     private boolean postOnly = true;
 
     public SmsCodeAuthenticationFilter() {
@@ -27,10 +34,12 @@ public class SmsCodeAuthenticationFilter extends AbstractAuthenticationProcessin
 
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException {
+        // 请求方式校验
         if (postOnly && !request.getMethod().equals("POST")) {
             throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
         }
 
+        // 获取请求中的参数值
         String mobile = obtainMobile(request);
 
         if (mobile == null) {
@@ -44,6 +53,9 @@ public class SmsCodeAuthenticationFilter extends AbstractAuthenticationProcessin
         // Allow subclasses to set the "details" property
         setDetails(request, authRequest);
 
+        /**
+         * 通过 {@link ProvierMagaer} 调用{@link SmsCodeAuthenticationProvider}
+         */
         return this.getAuthenticationManager().authenticate(authRequest);
     }
 

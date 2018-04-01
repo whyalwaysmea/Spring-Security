@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 /**
  * @Author: HanLong
  * @Date: Create in 2018/3/24 15:31
- * @Description:
+ * @Description:  类似于{@link DaoAuthenticationProvider}
  */
 public class SmsCodeAuthenticationProvider implements AuthenticationProvider {
 
@@ -27,6 +27,9 @@ public class SmsCodeAuthenticationProvider implements AuthenticationProvider {
 
         SmsCodeAuthenticationToken authenticationToken = (SmsCodeAuthenticationToken) authentication;
 
+        /**
+         * 调用 {@link UserDetailsService}
+         */
         UserDetails user = userDetailsService.loadUserByUsername((String) authenticationToken.getPrincipal());
 
         if (user == null) {

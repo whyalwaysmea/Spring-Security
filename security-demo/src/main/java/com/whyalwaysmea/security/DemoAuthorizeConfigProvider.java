@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 /**
  * @Author: HanLong
  * @Date: Create in 2018/3/31 15:09
- * @Description:
+ * @Description:    跟业务相关的权限配置
  */
 @Component
 @Order(Integer.MAX_VALUE)

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 /**
  * @Author: HanLong
  * @Date: Create in 2018/3/24 15:31
- * @Description:    验证码
+ * @Description:    sms短信登录配置
  */
 @Component
 public class SmsCodeAuthenticationSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {

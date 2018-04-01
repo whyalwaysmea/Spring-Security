@@ -24,6 +24,5 @@ public class MyAuthorizeConfigManager implements AuthorizeConfigManager{
         for (AuthorizeConfigProvider authorizeConfigProvider : authorizeConfigProviders) {
             authorizeConfigProvider.config(config);
         }
-//        config.anyRequest().authenticated();
     }
 }
